@@ -10,9 +10,9 @@ runcmd:
   - echo ""
   - echo ""
   - echo "--- begin --- Proxy daemon installation ----------------------------------------"
-  - sudo yum install -y squid # install squid
-  - sudo systemctl enable squid # up squid
-  - systemctl enable squid # Automatic wake up
+  - sudo yum install -y squid   # install squid
+  - sudo systemctl start squid  # start squid
+  - sudo systemctl enable squid # Automatic start setting
   - echo "------------------------------------------------------------------------ end ---"
   - echo ""
   - echo ""

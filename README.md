@@ -13,9 +13,48 @@
 
 ## 動作確認
 
+動作確認
+
 ```bash
-http_proxy=http://10.0.0.9:3128
+cd ~
+http_proxy=http://10.0.0.24:3128
 curl google.com -x ${http_proxy}
+
+curl google.com -x http://10.0.0.24:3128
+```
+
+Proxy が立ち上がるまで待機が必要な場合．
+
+```bash
+cd ~
+touch test.sh
+chmod +x test.sh
+nano test.sh
+```
+```bash
+#!/bin/bash
+
+http_proxy=http://10.0.0.24:3128
+
+MAX_RETRY=10000
+INTERVAL=60
+for i in $(seq 1 $MAX_RETRY); do
+    echo "$i tiems"
+    curl -m 60 google.com -x ${http_proxy}
+    if [ $? -eq 0 ]; then
+        echo "Success"
+        break
+    else
+        sleep $INTERVAL && /bin/false
+        echo "Failed"
+    fi
+done
+
+if [ $? -eq 0 ]; then
+    echo "Success"
+else
+    echo "Failed (Exceed max retry count)"
+fi
 ```
 
 ## SSH アクセス (EC2)
