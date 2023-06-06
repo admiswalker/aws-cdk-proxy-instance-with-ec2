@@ -1,0 +1,18 @@
+#cloud-config
+users:
+  - default
+runcmd:
+  - echo ""
+  - echo ""
+  - echo "--- begin --- yum update -------------------------------------------------------"
+  - sudo yum update -y
+  - echo "------------------------------------------------------------------------ end ---"
+  - echo ""
+  - echo ""
+  - echo "--- begin --- Proxy daemon installation ----------------------------------------"
+  - sudo yum install -y squid # install squid
+  - sudo systemctl enable squid # up squid
+  - systemctl enable squid # Automatic wake up
+  - echo "------------------------------------------------------------------------ end ---"
+  - echo ""
+  - echo ""

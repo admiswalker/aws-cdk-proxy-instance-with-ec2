@@ -1,0 +1,19 @@
+#cloud-config
+cloud_final_modules:
+  - [users-groups, always]
+users: # run by "users-groups" option
+  - default
+  - name: admis
+    groups: [wheel]
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGsHMbqflou/Pow660rnIJq8wdtCnoJhzZfh6BAOWrxQ admis@admis-MS-7A34
+runcmd: # run by "scripts-user" option
+  - echo ""
+  - echo ""
+  - echo "--- begin --- example of run command -------------------------------------------"
+  - echo "Hello cloud-config / runcmd"
+  - echo "------------------------------------------------------------------------ end ---"
+  - echo ""
+  - echo ""
